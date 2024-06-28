@@ -16,7 +16,6 @@ def parse_and_validate_post_request(request):
     return data, None, None
 
 
-
 @app.route('/gen-model', methods=['POST'])
 def home():
     # Validate Post request
@@ -46,8 +45,9 @@ def home():
     helpers.upload_model(data['user_id'],data['gen_id'])
     return (comfy_response)
 
+
 @app.route('/home', methods=['GET'])
-def home():
+def hello():
     return 'hello home'
 
 
