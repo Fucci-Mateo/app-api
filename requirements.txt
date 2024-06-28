@@ -1,0 +1,7 @@
+requests
+flask
+random
+glob
+time
+json
+cloudinary

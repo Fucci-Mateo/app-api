@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 import comfy_controllers
 import workflows
-import json
 import random
 import comfy_controllers
 import helpers
