@@ -1,6 +1,3 @@
 requests
 flask
-glob
-time
-json
 cloudinary
