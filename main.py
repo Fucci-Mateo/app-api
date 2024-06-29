@@ -4,6 +4,7 @@ import workflows
 import random
 import comfy_controllers
 import helpers
+import os
 
 app = Flask(__name__)
 temporal_files_path='/home/flowingbe/ComfyUI/output/temporal_files'
@@ -42,7 +43,8 @@ def home():
         'prompt_status': prompt_status})
     
     
-    helpers.upload_model(data['user_id'],data['gen_id'])
+    cloudinary_ids, model_pics = helpers.upload_model(data['user_id'],data['gen_id'])
+    
     return (comfy_response)
 
 

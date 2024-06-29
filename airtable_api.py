@@ -44,8 +44,6 @@ def push_model_to_airtable(user_id,model_images):
             }
         }]
     }
-    print("DATA : ")
-    print(data)
 
     response = requests.post(url, headers=headers, json=data)
     return response.json()
