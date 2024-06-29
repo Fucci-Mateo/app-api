@@ -35,7 +35,6 @@ def get_pose_by_name(pose_name):
 
 def push_model_to_airtable(user_id,model_images):
     url = f"https://api.airtable.com/v0/{base_id}/{models_table}"
-
     data = {"records": [{
         "fields": {
             "images": [{'url':model_images[0]},{'url':model_images[1]},{'url':model_images[2]},{'url':model_images[3]}], 
@@ -43,6 +42,8 @@ def push_model_to_airtable(user_id,model_images):
             }
         }]
     }
+    print("DATA : ")
+    print(data)
 
     response = requests.post(url, headers=headers, json=data)
     return response.json()
