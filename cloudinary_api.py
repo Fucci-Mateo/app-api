@@ -29,6 +29,11 @@ def auto_crop_url(public_id):
 
 # Delete an image
 def delete_image_cloudordinary(public_id):
-    result=cloudinary.uploader.destroy(public_id)
+    if type(public_id)==list:
+        for id in public_id:
+            result=cloudinary.uploader.destroy(id)
+            print(result)
+    else:
+        result=cloudinary.uploader.destroy(public_id)
     print(result)
 

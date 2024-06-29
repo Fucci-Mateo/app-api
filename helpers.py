@@ -12,13 +12,23 @@ def get_pose_pics(pose_id):
 
 
 def upload_model(user_id,model_id):
+    #get path to model pics
     model_pics = get_model_pics(model_id)
-    print(model_pics)
+    
+    #create list of cloudinary ids & urls
     model_urls = []
+    ids=[]
+
+    #upload model pics to cloudinary
     for pic in model_pics:
         public_id = pic.split("_")[-1].split(".")[0]
         model_urls += [cloudinary_api.upload_cloudinary(pic, public_id)]
-    print()
+        ids += [public_id]
+    
+    #push model to airtable
     resp = airtable_api.push_model_to_airtable(user_id, model_urls)
     print(resp)
+    
+    # Delete images brom cloudinary
+    cloudinary_api.delete_image_cloudordinary(ids)
     return resp
