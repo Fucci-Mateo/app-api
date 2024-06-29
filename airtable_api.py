@@ -56,14 +56,17 @@ def get_model_images_by_id(model_id):
     params = {
         'maxRecords': '1',
         'filterByFormula': "model_id={}".format(str(model_id)),
-        'fields[]': 'images' 
+        'fields[]': 'images',
+        'fields': 'setup' 
     }
+    print(params)
 
     response = requests.get(url, headers=headers, params=params)
 
-    images=response.json()['records'][0]['fields']['images']
+    model_images=response.json()['records'][0]['fields']['images']
+    model_setup=response.json()['records'][0]['fields']['setup']
     
     img_urls=[]
-    img_urls += [img['url'] for img in images]
+    img_urls += [img['url'] for img in model_images]
 
-    return img_urls
+    return img_urls, model_setup
