@@ -40,7 +40,7 @@ def push_model_to_airtable(user_id,model_images):
     data = {"records": [{
         "fields": {
             "images": [{'url':model_images[0]},{'url':model_images[1]},{'url':model_images[2]},{'url':model_images[3]}], 
-            "user_id": user_id
+            "user_id": int(user_id)
             }
         }]
     }
