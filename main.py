@@ -42,9 +42,9 @@ def gen_model():
         'prompt-id':prompt_id,
         'prompt_status': prompt_status})
     
-    print(jsonify(data))
+    print(data)
     
-    resp = helpers.upload_model(data['user_id'],data['gen_id'],jsonify(data))
+    resp = helpers.upload_model(data['user_id'],data['gen_id'],data)
     print(resp)
     return (comfy_response)
 
