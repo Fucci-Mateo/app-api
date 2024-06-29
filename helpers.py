@@ -13,7 +13,9 @@ def get_pose_pics(pose_id):
 
 def upload_model(user_id,model_id):
     model_pics = get_model_pics(model_id)
+    print(model_pics)
     for pic in model_pics:
         model_urls = cloudinary_api.upload_cloudinary(pic, f"model-{model_id}")
-    
-    return airtable_api.push_model_to_airtable(user_id, model_urls)
+    resp = airtable_api.push_model_to_airtable(user_id, model_urls)
+    print(resp)
+    return resp
