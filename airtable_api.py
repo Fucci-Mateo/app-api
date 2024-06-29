@@ -1,4 +1,5 @@
 import requests
+import json
 from credentials import creds
 
 url = "https://api.airtable.com/v0/"
@@ -41,7 +42,7 @@ def push_model_to_airtable(user_id,model_images,model_setup):
         "fields": {
             "images": [{'url':model_images[0]},{'url':model_images[1]},{'url':model_images[2]},{'url':model_images[3]}], 
             "user_id": int(user_id),
-            "setup": str(model_setup)
+            "setup": json.dumps(model_setup)
             }
         }]
     }
