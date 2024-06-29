@@ -34,6 +34,8 @@ def get_pose_by_name(pose_name):
 
 
 def push_model_to_airtable(user_id,model_images):
+    if user_id is None:
+        user_id = 1
     url = f"https://api.airtable.com/v0/{base_id}/{models_table}"
     data = {"records": [{
         "fields": {
