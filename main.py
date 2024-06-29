@@ -61,4 +61,4 @@ def hello():
 #     return jsonify(sample_data)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=9099)
+    app.run(host='0.0.0.0', port=9099)
