@@ -27,9 +27,9 @@ def delayed_delete(cloudinary_ids,model_pics):
     print("DELETION PROCESS FINISHED.")
     
 
-def upload_model(user_id,model_id):
+def upload_model(user_id,gen_id,model_setup):
     #get path to model pics
-    model_pics = get_model_pics(model_id)
+    model_pics = get_model_pics(gen_id)
     
     #create list of cloudinary ids & urls
     model_urls = []
@@ -42,7 +42,7 @@ def upload_model(user_id,model_id):
         cloudinary_ids += [public_id]
     
     #push model to airtable
-    resp = airtable_api.push_model_to_airtable(user_id, model_urls)
+    resp = airtable_api.push_model_to_airtable(user_id, model_urls,model_setup)
     
 
     threading.Thread(target=delayed_delete, args=(cloudinary_ids,model_pics)).start()

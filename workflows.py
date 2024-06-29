@@ -57,7 +57,7 @@ gen_models_workflow = '''
   }},
   "6": {{
     "inputs": {{
-      "text": "realistic photograph, closeup, beautiful woman, closed mouth, {origin_features} features, {hair_color} hair,symmetrical features, clear skin, wearing a tank top, light makeup, {style}, refined, {features_style} features, soft lighting, natural look, {eye_color} eyes, chiseled cheekbones, slight smile, {lips_style} lips, natural hair color, (full face:1.3), (realistic eyes:1.15)\\n\\n background blurred 4k, highly detailed, high-quality, masterpiece, whi",
+      "text": "realistic photograph, closeup, beautiful {gender}, closed mouth, {origin_features} features, {hair_color} hair,symmetrical features, clear skin, wearing a tank top, light makeup, {style}, refined, {features_style} features, soft lighting, natural look, {eye_color} eyes, chiseled cheekbones, slight smile, {lips_style} lips, natural hair color, (full face:1.3), (realistic eyes:1.15)\\n\\n background blurred 4k, highly detailed, high-quality, masterpiece, whi",
       "clip": [
         "10",
         1

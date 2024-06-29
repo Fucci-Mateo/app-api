@@ -18,7 +18,7 @@ def parse_and_validate_post_request(request):
 
 
 @app.route('/gen-model', methods=['POST'])
-def home():
+def gen_model():
     # Validate Post request
     data, error_response, status_code = parse_and_validate_post_request(request)
     if error_response:
@@ -42,17 +42,29 @@ def home():
         'prompt-id':prompt_id,
         'prompt_status': prompt_status})
     
+    print(jsonify(data))
     
-    resp = helpers.upload_model(data['user_id'],data['gen_id'])
+    resp = helpers.upload_model(data['user_id'],data['gen_id'],jsonify(data))
     print(resp)
     return (comfy_response)
+
+
+@app.route('/gen-close-up', methods=['POST'])
+def gen_close_up():
+    # Validate Post request
+    data, error_response, status_code = parse_and_validate_post_request(request)
+    if error_response:
+        return jsonify(error_response), status_code
+    
+
+
+    return 'hello gen-close-up'
+
 
 
 @app.route('/home', methods=['GET'])
 def hello():
     return 'hello home'
-
-
 
 
 

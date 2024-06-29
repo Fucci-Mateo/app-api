@@ -33,17 +33,36 @@ def get_pose_by_name(pose_name):
     return response.json()
 
 
-def push_model_to_airtable(user_id,model_images):
+def push_model_to_airtable(user_id,model_images,model_setup):
     if user_id is None:
         user_id = 1
     url = f"https://api.airtable.com/v0/{base_id}/{models_table}"
     data = {"records": [{
         "fields": {
             "images": [{'url':model_images[0]},{'url':model_images[1]},{'url':model_images[2]},{'url':model_images[3]}], 
-            "user_id": int(user_id)
+            "user_id": int(user_id),
+            "setup": str(model_setup)
             }
         }]
     }
 
     response = requests.post(url, headers=headers, json=data)
     return response.json()
+
+def get_model_images_by_id(model_id):
+    url = f"https://api.airtable.com/v0/{base_id}/{models_table}"
+
+    params = {
+        'maxRecords': '1',
+        'filterByFormula': "model_id={}".format(str(model_id)),
+        'fields[]': 'images' 
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+
+    images=response.json()['records'][0]['fields']['images']
+    
+    img_urls=[]
+    img_urls += [img['url'] for img in images]
+
+    return img_urls
