@@ -16,7 +16,9 @@ def upload_model(user_id,model_id):
     print(model_pics)
     model_urls = []
     for pic in model_pics:
-        model_urls += [cloudinary_api.upload_cloudinary(pic, f"model-{model_id}")]
+        public_id = pic.split("_")[-1].split(".")[0]
+        model_urls += [cloudinary_api.upload_cloudinary(pic, public_id)]
+    print()
     resp = airtable_api.push_model_to_airtable(user_id, model_urls)
     print(resp)
     return resp
