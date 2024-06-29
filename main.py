@@ -34,7 +34,10 @@ def gen_model():
     
     # Format the JSON template with the values
     formatted_workflow, error = workflows.format_workflow(workflows.gen_models_workflow,data)
-
+    if error:
+        return jsonify({"error": error}), 400
+    
+    
     # push to comfy queue
     comfy_response = comfy_controllers.push_queue(formatted_workflow)
     prompt_id=comfy_response['prompt_id']
