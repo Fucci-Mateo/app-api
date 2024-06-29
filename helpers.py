@@ -16,16 +16,15 @@ def get_pose_pics(pose_id):
 
 
 def delayed_delete(cloudinary_ids,model_pics):
-    print("deletion process started, now sleeping 10 secs.")
+    print("DELETION PROCESS STARTED. SLEEP 10.")
     time.sleep(10)
     for pic in model_pics:
-        print('rm -rf {pic}'.format(pic=pic))
-        os.system('rm -rf {pic}'.format(pic=pic))
+        os.system('sudo rm -rf {pic}'.format(pic=pic))
 
     for public_id in cloudinary_ids:
         cloudinary_api.delete_image_cloudordinary(public_id)
 
-    print("deletion process ended")
+    print("DELETION PROCESS FINISHED.")
     
 
 def upload_model(user_id,model_id):
@@ -44,8 +43,8 @@ def upload_model(user_id,model_id):
     
     #push model to airtable
     resp = airtable_api.push_model_to_airtable(user_id, model_urls)
-    print(resp)
-
-    deletion_thread = threading.Thread(target=delayed_delete, args=(cloudinary_ids,model_pics)).start()
     
-    return f"done with uploading of model {model_id}"
+
+    threading.Thread(target=delayed_delete, args=(cloudinary_ids,model_pics)).start()
+    
+    return resp

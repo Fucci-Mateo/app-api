@@ -43,8 +43,8 @@ def home():
         'prompt_status': prompt_status})
     
     
-    cloudinary_ids, model_pics = helpers.upload_model(data['user_id'],data['gen_id'])
-    
+    resp = helpers.upload_model(data['user_id'],data['gen_id'])
+    print(resp)
     return (comfy_response)
 
 
