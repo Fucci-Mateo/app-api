@@ -26,8 +26,12 @@ def gen_model():
     
     # Add random generation id and seed
     data['gen_id']=str(random.randint(0, 10000))
-    data['seed']=str(random.randint(0, 999999999999999))
     data['user_id']='1'
+    
+    if data['seed'] is None:
+        data['seed']=str(random.randint(0, 999999999999999))
+
+    
     # Format the JSON template with the values
     formatted_workflow, error = workflows.format_workflow(workflows.gen_models_workflow,data)
 
