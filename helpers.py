@@ -30,5 +30,5 @@ def upload_model(user_id,model_id):
     print(resp)
     
     # Delete images brom cloudinary
-    cloudinary_api.delete_image_cloudordinary(ids)
+    #cloudinary_api.delete_image_cloudordinary(ids)
     return resp
