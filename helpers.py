@@ -13,7 +13,7 @@ def get_pose_pics(pose_id):
 
 def upload_model(user_id,model_id):
     if user_id== None:
-        user_id='1'
+        user_id=1
     model_pics = get_model_pics(model_id)
     print(model_pics)
     for pic in model_pics:
