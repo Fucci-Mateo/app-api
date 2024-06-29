@@ -27,8 +27,8 @@ def gen_model():
     # Add random generation id and seed
     data['gen_id']=str(random.randint(0, 10000))
     data['user_id']='1'
-    
-    if data['seed'] is None:
+
+    if 'seed' not in data.keys():
         data['seed']=str(random.randint(0, 999999999999999))
 
     
