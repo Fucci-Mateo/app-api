@@ -34,23 +34,25 @@ def inference():
     
     # Format the JSON template with the values
     formatted_workflow, error = workflows.format_workflow(workflows.inference_auto,data)
-    
-
-    # if error:
-    #     return jsonify({"error": error}), 400
+    if error:
+       return jsonify({"error": error}), 400
     
     
-    # # push to comfy queue
-    # comfy_response = comfy_controllers.push_queue(formatted_workflow)
-    # prompt_id=comfy_response['prompt_id']
-
-    # #check prompt status
-    # prompt_status = comfy_controllers.check_prompt_status(prompt_id)
-        
-    # print(comfy_response)
+    # Push to comfy queue
+    comfy_response = comfy_controllers.push_queue(formatted_workflow)
+    print(formatted_workflow)
 
     
-    return (json.dumps(formatted_workflow))
+    prompt_id=comfy_response['prompt_id']
+
+    # Check prompt status
+    prompt_status = comfy_controllers.check_prompt_status(prompt_id)
+    
+    inference_result_url = helpers.upload_inference_results(data['gen_id'])
+    print(comfy_response)
+
+    
+    return (inference_result_url)
 
 
 

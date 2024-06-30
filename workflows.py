@@ -339,8 +339,8 @@ inference_auto='''
     "inputs": {{
       "garment_description": "model wearing {product_string}",
       "negative_prompt": "monochrome, lowres, bad anatomy, worst quality, low quality",
-      "width": 1024,
-      "height": 1024,
+      "width": {width},
+      "height": {height},
       "num_inference_steps": 30,
       "guidance_scale": 2,
       "strength": 1,
@@ -511,3 +511,5 @@ inference_auto='''
     }}
   }}
 }}'''
+
+

@@ -10,9 +10,21 @@ def get_model_pics(model_id):
     model_pics=sorted(glob.glob("/home/flowingbe/ComfyUI/output/temporal/model-{id}_*".format(id=model_id)))
     return model_pics
 
+def get_inference_result(gen_id):
+    results=sorted(glob.glob("/home/flowingbe/ComfyUI/output/temporal/inference-{id}_*".format(id=gen_id)))
+    return results
+
 def get_pose_pics(pose_id):
     pose_pics=sorted(glob.glob("/home/flowingbe/ComfyUI/output/temporal/pose-{id}_*".format(id=pose_id)))
     return pose_pics
+
+def upload_inference_results(gen_id):
+    #get path to model pics
+    inference_result_path = get_inference_result(gen_id)[0]
+    
+    result_url = cloudinary_api.upload_cloudinary(inference_result_path, f"inference-{gen_id}")
+    
+    return result_url
 
 
 def delayed_delete(cloudinary_ids,model_pics):
