@@ -315,5 +315,199 @@ gen_models_workflow = '''
 }}
 '''
 
-# Define the values for the placeholders
-
+inference_auto='''
+{{
+  "4": {{
+    "inputs": {{
+      "model_name": "GroundingDINO_SwinT_OGC (694MB)"
+    }},
+    "class_type": "GroundingDinoModelLoader (segment anything)",
+    "_meta": {{
+      "title": "GroundingDinoModelLoader (segment anything)"
+    }}
+  }},
+  "12": {{
+    "inputs": {{
+      "model_name": "sam_vit_b (375MB)"
+    }},
+    "class_type": "SAMModelLoader (segment anything)",
+    "_meta": {{
+      "title": "SAMModelLoader (segment anything)"
+    }}
+  }},
+  "14": {{
+    "inputs": {{
+      "garment_description": "model wearing {product_string}",
+      "negative_prompt": "monochrome, lowres, bad anatomy, worst quality, low quality",
+      "width": 1024,
+      "height": 1024,
+      "num_inference_steps": 30,
+      "guidance_scale": 2,
+      "strength": 1,
+      "seed": {seed},
+      "pipeline": [
+        "16",
+        0
+      ],
+      "human_img": [
+        "53",
+        0
+      ],
+      "pose_img": [
+        "36",
+        0
+      ],
+      "mask_img": [
+        "45",
+        0
+      ],
+      "garment_img": [
+        "54",
+        0
+      ]
+    }},
+    "class_type": "IDM-VTON",
+    "_meta": {{
+      "title": "Run IDM-VTON Inference"
+    }}
+  }},
+  "15": {{
+    "inputs": {{
+      "images": [
+        "14",
+        0
+      ]
+    }},
+    "class_type": "PreviewImage",
+    "_meta": {{
+      "title": "Preview Image"
+    }}
+  }},
+  "16": {{
+    "inputs": {{
+      "weight_dtype": "float16"
+    }},
+    "class_type": "PipelineLoader",
+    "_meta": {{
+      "title": "Load IDM-VTON Pipeline"
+    }}
+  }},
+  "25": {{
+    "inputs": {{
+      "prompt": "{product_string}",
+      "threshold": 0.3,
+      "sam_model": [
+        "12",
+        0
+      ],
+      "grounding_dino_model": [
+        "4",
+        0
+      ],
+      "image": [
+        "53",
+        0
+      ]
+    }},
+    "class_type": "GroundingDinoSAMSegment (segment anything)",
+    "_meta": {{
+      "title": "GroundingDinoSAMSegment (segment anything)"
+    }}
+  }},
+  "36": {{
+    "inputs": {{
+      "model": "densepose_r101_fpn_dl.torchscript",
+      "cmap": "Viridis (MagicAnimate)",
+      "resolution": 512,
+      "image": [
+        "53",
+        0
+      ]
+    }},
+    "class_type": "DensePosePreprocessor",
+    "_meta": {{
+      "title": "DensePose Estimator"
+    }}
+  }},
+  "45": {{
+    "inputs": {{
+      "mask": [
+        "25",
+        1
+      ]
+    }},
+    "class_type": "MaskToImage",
+    "_meta": {{
+      "title": "Convert Mask to Image"
+    }}
+  }},
+  "52": {{
+    "inputs": {{
+      "output_path": "temporal",
+      "filename_prefix": "inference-{gen_id}",
+      "filename_delimiter": "_",
+      "filename_number_padding": 1,
+      "filename_number_start": "false",
+      "extension": "png",
+      "dpi": 300,
+      "quality": 100,
+      "optimize_image": "true",
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "true",
+      "show_previews": "true",
+      "images": [
+        "14",
+        0
+      ]
+    }},
+    "class_type": "Image Save",
+    "_meta": {{
+      "title": "Image Save"
+    }}
+  }},
+  "53": {{
+    "inputs": {{
+      "url_or_path": "{pic_url}"
+    }},
+    "class_type": "LoadImageFromUrlOrPath",
+    "_meta": {{
+      "title": "LoadImageFromUrlOrPath"
+    }}
+  }},
+  "54": {{
+    "inputs": {{
+      "url_or_path": "{garment_url}"
+    }},
+    "class_type": "LoadImageFromUrlOrPath",
+    "_meta": {{
+      "title": "LoadImageFromUrlOrPath"
+    }}
+  }},
+  "55": {{
+    "inputs": {{
+      "images": [
+        "54",
+        0
+      ]
+    }},
+    "class_type": "PreviewImage",
+    "_meta": {{
+      "title": "Preview Image"
+    }}
+  }},
+  "56": {{
+    "inputs": {{
+      "images": [
+        "53",
+        0
+      ]
+    }},
+    "class_type": "PreviewImage",
+    "_meta": {{
+      "title": "Preview Image"
+    }}
+  }}
+}}'''

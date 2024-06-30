@@ -5,6 +5,7 @@ import random
 import comfy_controllers
 import helpers
 import os
+import json
 
 app = Flask(__name__)
 temporal_files_path='/home/flowingbe/ComfyUI/output/temporal_files'
@@ -15,6 +16,44 @@ def parse_and_validate_post_request(request):
     if not data:
         return None, {"error": "Invalid JSON"}, 400
     return data, None, None
+
+
+@app.route('/inference', methods=['POST'])
+def inference():
+    # Validate Post request
+    data, error_response, status_code = parse_and_validate_post_request(request)
+    if error_response:
+        return jsonify(error_response), status_code
+    
+    # Add random generation id and seed
+    data['gen_id']=str(random.randint(0, 10000))
+
+    if 'seed' not in data.keys():
+        data['seed']=str(random.randint(0, 999999999999999))
+
+    
+    # Format the JSON template with the values
+    formatted_workflow, error = workflows.format_workflow(workflows.inference_auto,data)
+    
+
+    # if error:
+    #     return jsonify({"error": error}), 400
+    
+    
+    # # push to comfy queue
+    # comfy_response = comfy_controllers.push_queue(formatted_workflow)
+    # prompt_id=comfy_response['prompt_id']
+
+    # #check prompt status
+    # prompt_status = comfy_controllers.check_prompt_status(prompt_id)
+        
+    # print(comfy_response)
+
+    
+    return (json.dumps(formatted_workflow))
+
+
+
 
 
 @app.route('/gen-model', methods=['POST'])

@@ -2,7 +2,7 @@ import requests
 import json
 import time 
 
-base_url=   'http://34.116.202.145:8188'
+base_url=   'http://34.85.230.202:8188'
 prompt_endpoint= '/prompt'
 queue_endpoint= '/queue'
 history_endpoint= '/history'
